@@ -9,13 +9,14 @@ import pickle
 
 
 def create_custom_model(data_path):
-    data = pd.read_csv(f'{data_path}')
-    data['content'] = data['content'].fillna('')
+    data = pd.read_csv(f"{data_path}")
+    data["content"] = data["content"].fillna("")
 
-    X = data['content']
-    y = data['favorites']
+    X = data["content"]
+    y = data["favorites"]
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=321)
+        X, y, test_size=0.2, random_state=321
+    )
 
     vectorizer = TfidfVectorizer(min_df=10)
     X_train_vectorized = vectorizer.fit_transform(X_train).toarray()
@@ -36,17 +37,17 @@ def create_custom_model(data_path):
     mae = mean_absolute_error(y_test, y_pred)
     print("Mean Absolute Error:", mae)
 
-    filename = 'finalized_model.sav'
-    pickle.dump(model, open(filename, 'wb'))
+    filename = "finalized_model.sav"
+    pickle.dump(model, open(filename, "wb"))
 
-    filename = 'vectorizer.sav'
-    pickle.dump(vectorizer, open(filename, 'wb'))
+    filename = "vectorizer.sav"
+    pickle.dump(vectorizer, open(filename, "wb"))
 
 
 def predict_populatiry(content):
-    filename = 'finalized_model.sav'
-    model = pickle.load(open(filename, 'rb'))
-    filename = 'vectorizer.sav'
-    vectorizer = pickle.load(open(filename, 'rb'))
+    filename = "finalized_model.sav"
+    model = pickle.load(open(filename, "rb"))
+    filename = "vectorizer.sav"
+    vectorizer = pickle.load(open(filename, "rb"))
     content_vectorized = vectorizer.transform([content]).toarray()
     return model.predict(content_vectorized)[0]
