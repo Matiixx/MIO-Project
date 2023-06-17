@@ -43,5 +43,10 @@ def create_custom_model(data_path):
     pickle.dump(vectorizer, open(filename, 'wb'))
 
 
-def predict_populatiry(post):
-    pass
+def predict_populatiry(content):
+    filename = 'finalized_model.sav'
+    model = pickle.load(open(filename, 'rb'))
+    filename = 'vectorizer.sav'
+    vectorizer = pickle.load(open(filename, 'rb'))
+    content_vectorized = vectorizer.transform([content]).toarray()
+    return model.predict(content_vectorized)[0]
