@@ -12,7 +12,7 @@ def create_custom_model(data_path):
     data["content"] = data["content"].fillna("")
 
     X = data["content"]
-    y = data["favorites"]
+    y = data["retweets"]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=321
     )
