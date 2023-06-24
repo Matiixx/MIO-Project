@@ -11,10 +11,12 @@ def main(argv):
     elif argv == "predict_popularity":
         print(
             predict_populatiry(
-                '"My persona will never be that of a wallflower - I’d rather build walls than cling to them" --Donald J. Trump'
+                "If Syria was forced to use Obamacare they would self-destruct without a shot being fired. Obama should sell them that idea!"
             )
         )
 
 
 if __name__ == "__main__":
     main(sys.argv[1])
+
+# If Syria was forced to use Obamacare they would self-destruct without a shot being fired. Obama should sell them that idea! - 1045 retweets
